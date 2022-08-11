@@ -1,5 +1,6 @@
 repos:
-    - url: "git@github.com/Odoo-Ninjas/ansible-bin.git"
-      branch: master
-      path: bin
-      type: submodule
+- branch: master
+  path: bin
+  sha: 681b4088d0efc31a4c5e03fa3a96f0e94921809c
+  type: submodule
+  url: git@github.com:Odoo-Ninjas/ansible-bin.git
