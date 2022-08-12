@@ -4,6 +4,7 @@
         name:
           - xbindkeys
           - xdotool
+          - xcape
         state: present
         update_cache: yes
   become: yes
@@ -13,3 +14,8 @@
   copy:
     src: "{{ role_path }}/files/xmodmap"
     dest: ~/.xmodmap
+
+- name: enable caps with xcape as single key and for combination
+  lineinfile:
+    path: ~/.profile
+    line: "xcape -e 'Mode_switch=Escape'"
