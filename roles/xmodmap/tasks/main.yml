@@ -1,0 +1,15 @@
+---
+- block:
+    - apt:
+        name:
+          - xbindkeys
+          - xdotool
+        state: present
+        update_cache: yes
+  become: yes
+  become_user: root
+
+- name: copy xmodmap file to ~/.xmodmap
+  copy:
+    src: "{{ role_path }}/files/xmodmap"
+    dest: ~/.xmodmap
