@@ -20,7 +20,7 @@ cmd += sys.argv[1:]
 cmd += ['playbook.yml']
 
 res = subprocess.check_call(cmd)
-click.secho(f"Done: {inventory}", bold=True, fg='yellow')
-click.secho(f"-------------------------------------------------------", fg='yellow')
+click.secho("Done", bold=True, fg='yellow')
+click.secho("-------------------------------------------------------", fg='yellow')
 
 click.secho(f"Took: {(arrow.get() - started).total_seconds()}", fg='green', bold=True)

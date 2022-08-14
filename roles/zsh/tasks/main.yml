@@ -1,0 +1,22 @@
+---
+- block:
+  - name: install fonts powerline for zsh
+    apt:
+      name:
+        - fonts-powerline
+      state: present
+      update_cache: yes
+  become: yes
+  become_user: root
+
+- name: install solarized theme for zsh
+  args:
+    executable: /bin/bash
+  shell:
+    cmd: |
+      set -ex
+      if [[ ! -d ~/.solarized ]]; then
+        git clone git://github.com/sigurdga/gnome-terminal-colors-solarized.git ~/.solarized
+        cd ~/.solarized
+        ./install.sh
+      fi

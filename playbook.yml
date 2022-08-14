@@ -1,2 +1,3 @@
 ---
 - import_playbook: roles/xmodmap/playbook.yml
+- import_playbook: roles/zsh/playbook.yml

@@ -5,17 +5,18 @@
           - xbindkeys
           - xdotool
           - xcape
+          - wmctrl
         state: present
         update_cache: yes
   become: yes
   become_user: root
 
-- name: copy xmodmap file to ~/.xmodmap
+- name: copy xmodmap file to ~/.Xmodmap
   copy:
     src: "{{ role_path }}/files/xmodmap"
-    dest: ~/.xmodmap
+    dest: ~/.Xmodmap
 
 - name: enable caps with xcape as single key and for combination
   lineinfile:
-    path: ~/.profile
+    path: ~/.zshrc
     line: "xcape -e 'Mode_switch=Escape'"
