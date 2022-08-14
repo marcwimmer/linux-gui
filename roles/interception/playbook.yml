@@ -1,0 +1,9 @@
+---
+- hosts:
+    interception
+  any_errors_fatal: true
+  gather_facts: no
+  become: true
+  become_user: root
+  roles:
+    - interception

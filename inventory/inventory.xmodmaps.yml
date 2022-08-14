@@ -1,6 +1,0 @@
-xmodmap:
-  hosts:
-    localhost:
-      become: false
-      connection: local
-      ansible_user: "{{ lookup('env', 'USER')}}"

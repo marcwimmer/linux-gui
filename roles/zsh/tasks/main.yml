@@ -18,5 +18,8 @@
       if [[ ! -d ~/.solarized ]]; then
         git clone git://github.com/sigurdga/gnome-terminal-colors-solarized.git ~/.solarized
         cd ~/.solarized
-        ./install.sh
       fi
+
+- name: ask user to install theme
+  pause:
+    prompt: Please execute ./install.sh in ~/.solarized

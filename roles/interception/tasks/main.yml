@@ -1,0 +1,59 @@
+---
+- block:
+    - apt:
+        name:
+          - cmake
+          - libevdev-dev
+          - libudev-dev
+          - libyaml-cpp-dev
+          - libboost-dev
+          - xdotool
+          - wmctrl
+        state: present
+        update_cache: yes
+  become: yes
+  become_user: root
+
+- name: clone interception and build
+  shell:
+    executable: /bin/bash
+    cmd: |
+      set -ex
+      src=/usr/local/src/interception
+      test -d "$src" && rm -Rf "$src"
+      git clone https://gitlab.com/interception/linux/tools.git "$src"
+      cd "$src"
+      cmake -B build -DCMAKE_BUILD_TYPE=Release
+      cmake --build build
+
+      rm /usr/local/bin/{mux,intercept,udevmon,uinput} -Rf || true
+      cp build/{mux,intercept,udevmon,uinput} /usr/local/bin
+
+- name: make udevmon.d
+  file:
+    state: directory
+    path: /etc/interception/udevmon.d
+    recurse: yes
+    owner: root
+
+- name: install service
+  copy:
+    src: "{{ role_path }}/files/udevmon.service"
+    dest: /etc/systemd/system
+    owner: root
+    group: root
+
+- systemd:
+    name: udevmon
+    state: started
+    enabled: yes
+
+- name: copy right_shift to /etc/interception/udevmon.d/rightshift.yaml
+  copy:
+    src: "{{ role_path }}/files/rightshift.yaml"
+    dest: /etc/interception/udevmon.d/rightshift.yaml
+
+- name: copy dual_function_keys to ~/.xbindkeysrc
+  copy:
+    src: "{{ role_path }}/files/dual_function_keys.yaml"
+    dest: /etc/interception/dual_function_keys.yaml
