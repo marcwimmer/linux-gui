@@ -1,0 +1,4 @@
+[submodule "bin"]
+	path = bin
+	url = git@github.com:Odoo-Ninjas/ansible-bin.git
+	branch = master
