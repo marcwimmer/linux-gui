@@ -21,7 +21,18 @@
     src: "{{ role_path }}/files/xbindkeysrc"
     dest: ~/.xbindkeysrc
 
-- name: enable caps with xcape as single key and for combination
-  lineinfile:
-    path: ~/.zshrc
-    line: "xcape -e 'Mode_switch=Escape'"
+- block:
+  - name: enable caps with xcape as single key and for combination
+    lineinfile:
+      path: ~/.zshrc
+      line: "xcape -e 'Mode_switch=Escape'"
+
+  - name: after acpi wakeup xcape has to be restored
+    copy:
+      content: |
+        #!/bin/bash
+        xcape -e 'Mode_switch=Escape'
+      dest: /usr/lib/pm-utils/sleep.d/xape_capslock_escape.sh
+      mode: 500
+    become: yes
+    become_user: root
