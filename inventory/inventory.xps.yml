@@ -4,8 +4,14 @@ interception:
       become: false
       connection: local
       ansible_user: "{{ lookup('env', 'USER')}}"
-      vars:
-        LINK: /dev/input/by-path/platform-i8042-serio-0-event-kbd
+      LINK: /dev/input/by-path/platform-i8042-serio-0-event-kbd
+
+xmodmap:
+  hosts:
+    localhost:
+      become: false
+      connection: local
+      ansible_user: "{{ lookup('env', 'USER')}}"
 
 # zsh:
 #   hosts:

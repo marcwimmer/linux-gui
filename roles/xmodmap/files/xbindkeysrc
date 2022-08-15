@@ -1,5 +1,5 @@
 # to list keycodes execute
 # xbindkeys -k
 
-"terminator"
-  Shift+Shift_R+t
+#"terminator"
+#  Shift+Shift_R+t

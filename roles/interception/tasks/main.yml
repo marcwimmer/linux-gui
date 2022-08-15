@@ -28,6 +28,7 @@
 
       rm /usr/local/bin/{mux,intercept,udevmon,uinput} -Rf || true
       cp build/{mux,intercept,udevmon,uinput} /usr/local/bin
+  when: false
 
 - name: make udevmon.d
   file:
@@ -37,7 +38,7 @@
     owner: root
 
 - name: install service
-  copy:
+  template:
     src: "{{ role_path }}/files/udevmon.service"
     dest: /etc/systemd/system
     owner: root
@@ -48,12 +49,41 @@
     state: started
     enabled: yes
 
-- name: copy right_shift to /etc/interception/udevmon.d/rightshift.yaml
-  copy:
-    src: "{{ role_path }}/files/rightshift.yaml"
-    dest: /etc/interception/udevmon.d/rightshift.yaml
+- name: clone dual function keys and build
+  shell:
+    executable: /bin/bash
+    cmd: |
+      set -ex
+      src=/usr/local/src/interception_dual_function_keys
+      test -d "$src" && rm -Rf "$src"
+      git clone https://gitlab.com/interception/linux/plugins/dual-function-keys "$src"
+      cd "$src"
+      make
+      make install
 
-- name: copy dual_function_keys to ~/.xbindkeysrc
+- name: clone caps2esc and compile
+  shell:
+    executable: /bin/bash
+    cmd: |
+      set -ex
+      src=/usr/local/src/interception_caps2esc
+      test -d "$src" && rm -Rf "$src"
+      git clone https://gitlab.com/interception/linux/plugins/caps2esc "$src"
+      cd "$src"
+      git submodule update --init
+      cmake -B build -DCMAKE_BUILD_TYPE=Release
+      cmake --build build
+      cp build/caps2esc /usr/local/bin
+
+- name: copy right_shift to /etc/interception/udevmon.d/jobs.yaml
+  template:
+    src: "{{ role_path }}/files/jobs.yaml"
+    dest: /etc/interception/udevmon.d/jobs.yaml
+
+- name: copy dual_function_keys to /etc/interception/dual_function_keys.yaml
   copy:
     src: "{{ role_path }}/files/dual_function_keys.yaml"
     dest: /etc/interception/dual_function_keys.yaml
+
+- debug:
+    var: vars
