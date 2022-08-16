@@ -1,0 +1,7 @@
+---
+- hosts:
+    better_file_dialog
+  any_errors_fatal: true
+  gather_facts: no
+  roles:
+    - better_file_dialog
