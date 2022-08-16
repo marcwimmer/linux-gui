@@ -1,8 +1,8 @@
 ---
 - name: set script to use better open dialog
   copy:
-    template: |
+    content: |
       #!/bin/bash
       export GTK_USE_PORTAL=1
     dest: ~/.config/plasma-workspace/env/makeportal.sh
-    mod: 500
+    mode: 500
