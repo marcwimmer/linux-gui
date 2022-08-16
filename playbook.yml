@@ -1,5 +1,6 @@
 ---
 - import_playbook: roles/better_file_dialog/playbook.yml
+- import_playbook: roles/fusuma/playbook.yml
 - import_playbook: roles/interception/playbook.yml
 - import_playbook: roles/xmodmap/playbook.yml
 - import_playbook: roles/zsh/playbook.yml

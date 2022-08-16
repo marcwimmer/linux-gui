@@ -6,6 +6,13 @@ interception:
       ansible_user: "{{ lookup('env', 'USER')}}"
       LINK: /dev/input/by-path/platform-i8042-serio-0-event-kbd
 
+fusuma:
+  hosts:
+    localhost:
+      become: false
+      connection: local
+      ansible_user: "{{ lookup('env', 'USER')}}"
+
 xmodmap:
   hosts:
     localhost:

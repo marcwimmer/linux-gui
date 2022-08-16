@@ -1,0 +1,29 @@
+---
+- apt:
+    name:
+      - ruby
+      - libinput-tools
+    state: present
+    update_cache: yes
+  become: true
+  become_user: root
+
+- shell:
+    cmd: |
+      gem install fusuma
+      gem install fusuma-plugin-tap
+  become: true
+  become_user: root
+
+- file:
+    path: ~/.config/fusuma
+    state: directory
+
+- copy:
+    src: "{{ role_path}}/files/config.yml"
+    dest: ~/.config/fusuma/config.yml
+
+- cron:
+    name: "start gestures fusuma"
+    special_time: reboot
+    job: "/usr/local/bin/fusuma &"
