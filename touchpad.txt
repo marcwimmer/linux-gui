@@ -1,0 +1,5 @@
+libinput measure touchpad-pressure
+
+https://djorborn.medium.com/linux-trackpad-settings-sensitivity-and-more-f85d8882e5d3
+
+

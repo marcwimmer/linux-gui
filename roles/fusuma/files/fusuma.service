@@ -1,0 +1,21 @@
+[Unit]
+Description=Fusuma activate gestures on touchpad
+Requires=multi-user.target
+Requires=display-manager.service
+
+[Service]
+#Environment="DISPLAY=:0"
+ExecStart=/usr/local/bin/fusuma
+ExecReload=/bin/kill -HUP $MAINPID
+KillMode=process
+Restart=on-failure
+Nice=-20
+Restart=on-failure
+OOMScoreAdjust=-1000
+#Group=
+User=1000
+
+[Install]
+WantedBy=multi-user.target
+
+

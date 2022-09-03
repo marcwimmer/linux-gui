@@ -26,6 +26,45 @@
 - cron:
     name: "start gestures fusuma"
     special_time: reboot
-    job: "/usr/local/bin/fusuma &"
+    job: "/usr/local/bin/fusuma"
   become: true
   become_user: root
+
+# - name: install service
+#   template:
+#     src: "{{ role_path }}/files/fusuma.service"
+#     dest: /etc/systemd/system
+#     owner: root
+#     group: root
+#   become: true
+#   become_user: root
+
+# - systemd:
+#     name: fusuma
+#     state: started
+#     enabled: yes
+#     scope: user
+#   environment:
+#     XDG_RUNTIME_DIR: "/run/user/1000"
+
+- name: put current user to input group so he has access
+  shell:
+    cmd: |
+      set -x
+      usermod -aG input {{ ansible_user }}
+  become: true
+  become_user: root
+
+- name: put current user to input group so he has access
+  shell:
+    cmd: |
+      set -x
+      usermod -aG input {{ ansible_user }}
+
+      # apply change directly to avoid restart (https://github.com/iberianpig/fusuma)
+      newgrp input
+
+- name: copy KDE plasme auto start
+  copy:
+    src: "{{ role_path }}/files/plasma.desktop.autostart"
+    dest: ~/.config/autostart/fusuma.desktop

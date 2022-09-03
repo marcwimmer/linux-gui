@@ -61,6 +61,19 @@
       make
       make install
 
+# - name: setup choreded keymap
+#   shell:
+#     executable: /bin/bash
+#     cmd: |
+#       set -ex
+#       src=/usr/local/src/interception_dual_function_keys
+#       test -d "$src" && rm -Rf "$src"
+#       git clone https://gitlab.com/interception/linux/plugins/dual-function-keys "$src"
+#       cd "$src"
+#       make
+#       make install
+
+
 - name: clone caps2esc and compile
   shell:
     executable: /bin/bash

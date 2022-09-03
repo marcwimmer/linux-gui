@@ -3,6 +3,7 @@
   copy:
     content: |
       #!/bin/bash
-      export GTK_USE_PORTAL=1
+      # after sleep does not work
+      export GTK_USE_PORTAL=0
     dest: ~/.config/plasma-workspace/env/makeportal.sh
     mode: 500
