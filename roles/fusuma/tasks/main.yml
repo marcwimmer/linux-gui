@@ -23,12 +23,12 @@
     src: "{{ role_path}}/files/config.yml"
     dest: ~/.config/fusuma/config.yml
 
-- cron:
-    name: "start gestures fusuma"
-    special_time: reboot
-    job: "/usr/local/bin/fusuma"
-  become: true
-  become_user: root
+# - cron:
+#     name: "start gestures fusuma"
+#     special_time: reboot
+#     job: "/usr/local/bin/fusuma"
+#   become: true
+#   become_user: root
 
 # - name: install service
 #   template:
