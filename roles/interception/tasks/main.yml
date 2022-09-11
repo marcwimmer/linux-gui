@@ -13,6 +13,23 @@
         update_cache: yes
   become: yes
   become_user: root
+  when: ansible_facts['distribution'] == 'Debian' or ansible_facts['distribution'] == 'Ubuntu'
+
+- block:
+    - pacman:
+        name:
+          - cmake
+          - libevdev-devel
+          - libudev
+          - yaml-cpp
+          - boost-libs
+          - xdotool
+          - wmctrl
+        state: present
+        update_cache: yes
+      when: ansible_facts['distribution'] == 'Arch Linux'
+  become: yes
+  become_user: root
 
 - name: clone interception and build
   shell:

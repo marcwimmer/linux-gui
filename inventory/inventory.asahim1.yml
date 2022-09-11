@@ -1,0 +1,34 @@
+interception:
+  hosts:
+    localhost:
+      become: false
+      connection: local
+      ansible_user: "{{ lookup('env', 'USER')}}"
+      LINK: /dev/input/by-path/platform-39b10c000.spi-cs-0-event-kbd
+
+#fusuma:
+#  hosts:
+#    localhost:
+#      connection: local
+#      ansible_user: "{{ lookup('env', 'USER')}}"
+
+# xmodmap:
+#   hosts:
+#     localhost:
+#       become: false
+#       connection: local
+#       ansible_user: "{{ lookup('env', 'USER')}}"
+
+#better_file_dialog:
+#  hosts:
+#    localhost:
+#      become: false
+#      connection: local
+#      ansible_user: "{{ lookup('env', 'USER')}}"
+
+# zsh:
+#   hosts:
+#     localhost:
+#       become: false
+#       connection: local
+#       ansible_user: "{{ lookup('env', 'USER')}}"

@@ -2,7 +2,7 @@
 - hosts:
     interception
   any_errors_fatal: true
-  gather_facts: no
+  gather_facts: yes
   become: true
   become_user: root
   roles:
