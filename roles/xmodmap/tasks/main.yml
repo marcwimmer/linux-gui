@@ -36,6 +36,11 @@
     dest: ~/.xbindkeysrc
 
 - block:
+  - name: enable xmodmap
+    lineinfile:
+      path: ~/.zshrc
+      line: "xmodmap ~/.Xmodmap"
+
   - name: enable caps with xcape as single key and for combination
     lineinfile:
       path: ~/.zshrc

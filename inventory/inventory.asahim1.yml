@@ -12,12 +12,12 @@ interception:
 #      connection: local
 #      ansible_user: "{{ lookup('env', 'USER')}}"
 
-# xmodmap:
-#   hosts:
-#     localhost:
-#       become: false
-#       connection: local
-#       ansible_user: "{{ lookup('env', 'USER')}}"
+xmodmap:
+  hosts:
+    localhost:
+      become: false
+      connection: local
+      ansible_user: "{{ lookup('env', 'USER')}}"
 
 #better_file_dialog:
 #  hosts:
