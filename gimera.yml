@@ -1,6 +1,6 @@
 repos:
 - branch: master
   path: bin
-  sha: f809680b60f74a7ced93af9b3c501769e2761369
+  sha: 111f5f0725495308a549a98c52fdfe62aed2524c
   type: submodule
   url: https://github.com/Odoo-Ninjas/ansible-bin.git
