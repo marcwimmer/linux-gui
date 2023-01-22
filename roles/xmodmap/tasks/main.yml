@@ -46,12 +46,12 @@
       path: ~/.zshrc
       line: "xcape -e 'Mode_switch=Escape'"
 
-  - name: after acpi wakeup xcape has to be restored
-    copy:
-      content: |
-        #!/bin/bash
-        xcape -e 'Mode_switch=Escape'
-      dest: /usr/lib/pm-utils/sleep.d/xape_capslock_escape.sh
-      mode: 500
-    become: yes
-    become_user: root
+  # - name: after acpi wakeup xcape has to be restored
+  #   copy:
+  #     content: |
+  #       #!/bin/bash
+  #       xcape -e 'Mode_switch=Escape'
+  #     dest: /usr/lib/pm-utils/sleep.d/xape_capslock_escape.sh
+  #     mode: 500
+  #   become: yes
+  #   become_user: root

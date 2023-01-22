@@ -90,18 +90,18 @@
       make
       make install
 
-- name: clone karabiner s+jhkl
-  shell:
-    executable: /bin/bash
-    cmd: |
-      set -ex
-      src=/usr/local/src/interception_shjkl
-      test -d "$src" && rm -Rf "$src"
-      git clone https://github.com/kbairak/s2arrows "$src"
-      cd "$src"
-      cmake -B build -DCMAKE_BUILD_TYPE=Release
-      cmake --build build
-      cp build/s2arrows /usr/local/bin
+# - name: clone karabiner s+jhkl
+#   shell:
+#     executable: /bin/bash
+#     cmd: |
+#       set -ex
+#       src=/usr/local/src/interception_shjkl
+#       test -d "$src" && rm -Rf "$src"
+#       git clone https://github.com/kbairak/s2arrows "$src"
+#       cd "$src"
+#       cmake -B build -DCMAKE_BUILD_TYPE=Release
+#       cmake --build build
+#       cp build/s2arrows /usr/local/bin
 
 
 # - name: setup choreded keymap
