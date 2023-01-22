@@ -11,7 +11,7 @@
           - wmctrl
         state: present
         update_cache: yes
-  become: yes
+  become: true
   become_user: root
   when: ansible_facts['distribution'] == 'Debian' or ansible_facts['distribution'] == 'Ubuntu'
 
@@ -28,7 +28,7 @@
         state: present
         update_cache: yes
       when: ansible_facts['distribution'] == 'Arch Linux'
-  become: yes
+  become: true
   become_user: root
 
 - name: clone interception and build
@@ -77,6 +77,32 @@
       cd "$src"
       make
       make install
+
+- name: clone interception-vimproved
+  shell:
+    executable: /bin/bash
+    cmd: |
+      set -ex
+      src=/usr/local/src/interception_vimproved
+      test -d "$src" && rm -Rf "$src"
+      git clone https://github.com/maricn/interception-vimproved "$src"
+      cd "$src"
+      make
+      make install
+
+- name: clone karabiner s+jhkl
+  shell:
+    executable: /bin/bash
+    cmd: |
+      set -ex
+      src=/usr/local/src/interception_shjkl
+      test -d "$src" && rm -Rf "$src"
+      git clone https://github.com/kbairak/s2arrows "$src"
+      cd "$src"
+      cmake -B build -DCMAKE_BUILD_TYPE=Release
+      cmake --build build
+      cp build/s2arrows /usr/local/bin
+
 
 # - name: setup choreded keymap
 #   shell:

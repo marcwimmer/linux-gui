@@ -1,13 +1,24 @@
 ---
+# caps2ec - add in pipe to activate; or use wayland/local mapping
+# s2arrows - add in pipe to activate; not working so cool (ss hangs)
 
-# Both jobs do not work toegether
 # - JOB: "intercept -g $DEVNODE | caps2esc | uinput -d $DEVNODE"
 #   DEVICE:
 #     LINK: "{{ LINK }}"
 #     EVENTS:
 #       EV_KEY: [ KEY_CAPSLOCK, KEY_ESC ]
 
-- JOB: "intercept -g $DEVNODE | dual-function-keys -c /etc/interception/dual_function_keys.yaml | uinput -d $DEVNODE"
+# - JOB: "intercept -g $DEVNODE | s2arrows | uinput -d $DEVNODE"
+#   DEVICE:
+#     EVENTS:
+#       EV_KEY: [KEY_S, KEY_H, KEY_J, KEY_K, KEY_K, KEY_LEFT, KEY_DOWN,
+#                KEY_UP, KEY_RIGHT]
+# - JOB:
+#     - "intercept -g $DEVNODE | /opt/interception/interception-vimproved | uinput -d $DEVNODE"
+#   DEVICE:
+#     NAME: ".*((k|K)(eyboard|EYBOARD)|TADA68).*"
+
+- JOB: "intercept -g $DEVNODE | dual-function-keys -c /etc/interception/dual_function_keys.yaml | /opt/interception/interception-vimproved | uinput -d $DEVNODE"
   DEVICE:
     LINK: "{{ LINK }}"
     EVENTS:
